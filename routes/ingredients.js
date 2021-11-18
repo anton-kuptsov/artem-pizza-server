@@ -1,5 +1,4 @@
 const express = require("express");
-const passport = require("passport");
 const router = express.Router();
 const { nanoid } = require("nanoid");
 const idlength = 8;
@@ -132,17 +131,12 @@ router.get("/:ingredientId", (req, res) => {
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Ingredient'
- *       401:
- *         description: Вы не авторизованы
  *       500:
  *         description: Ошибка на сервере
  *
  */
 router.post(
   "/",
-  passport.authenticate("jwt", {
-    session: false,
-  }),
   (req, res) => {
     try {
       const { image, thumbnail } = req.files;
